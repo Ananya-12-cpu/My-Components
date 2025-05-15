@@ -16,18 +16,18 @@ function SideNav() {
 
       <div className="hover:bg-blue-300 hover:rounded-lg text-white p-1">Calculator</div>
       </Link>
-     <Link href="/slider">
+      {/* <Link href="/coming-soon">
 
       <div className="hover:bg-blue-300 hover:rounded-lg text-white p-1">Slider</div>
-      </Link>
-     <Link href="/todo">
+      </Link> */}
+     <Link href="/coming-soon">
 
       <div className="hover:bg-blue-300 hover:rounded-lg text-white p-1">To Do Application</div>
       </Link>
-     <Link href="/qr">
+     {/* <Link href="/qr">
 
       <div className="hover:bg-blue-300 hover:rounded-lg text-white p-1">Qr Reader</div>
-     </Link>
+     </Link> */}
      
      <Link href="/stopwatch">
 

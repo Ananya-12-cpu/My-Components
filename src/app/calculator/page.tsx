@@ -1,13 +1,10 @@
 'use client'
 
 import React from 'react'
+import Calculator from './Calculator'
 
 function CalculatorPage() {
-  return (
-    <div>
-   
-  </div>
-  )
+  return <Calculator />
 }
 
 export default CalculatorPage
