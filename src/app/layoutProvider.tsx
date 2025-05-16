@@ -7,8 +7,9 @@ import Image from "next/image";
 function LayoutProvider({ children }: any) {
   return (
     <>
-      <div className="grid grid-cols-1 gap-1 border-b-2 border-blue-300 p-2">
-        <div>
+      <div className="grid grid-cols-1 gap-1 border-b-2 border-blue-300 ">
+        {children}
+        {/* <div>
           <Image src={"/connection.gif"} alt="" width={80} height={50} />
         </div>
       </div>
@@ -18,7 +19,7 @@ function LayoutProvider({ children }: any) {
           <SideNav />
         </div>
 
-        <div className="col-span-9">{children}</div>
+        <div className="col-span-9">{children}</div> */}
       </div>
     </>
   );
