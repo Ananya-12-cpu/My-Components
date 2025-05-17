@@ -7,7 +7,7 @@ import Image from "next/image";
 function LayoutProvider({ children }: any) {
   return (
     <>
-      <div className="grid grid-cols-1 gap-1 border-b-2 border-blue-300 ">
+      <div className="grid grid-cols-1 gap-1 ">
         {children}
         {/* <div>
           <Image src={"/connection.gif"} alt="" width={80} height={50} />

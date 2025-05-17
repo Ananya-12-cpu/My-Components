@@ -25,7 +25,7 @@ const modules = [
   {
     name: "To Do Application",
     description: "Manage tasks and boost productivity.",
-    route: "/coming-soon",
+    route: "/todo",
   },
   {
     name: "Stop Watch",
