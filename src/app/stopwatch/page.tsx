@@ -1,35 +1,6 @@
 'use client'
 
 
-// export default function App() {
-//   const [timer, setTimer] = useState(0);
-
-//   const startTimer = () => {
-//     window.myTimer = setInterval(() => {
-//       setTimer((timer) => timer + 1);
-//     }, 1000);
-//   };
-//   const stopTimer = () => {
-//     clearInterval(window.myTimer);
-//   };
-//   const resetTimer = () => {
-//     clearInterval(window.myTimer);
-//     setTimer(0);
-//   };
-//   return (
-//     <div className="container">
-//       <h1 className='text-white'>Timer</h1>
-//       <span className='text-white'>{Math.trunc(timer / 60)} mins </span>
-//       <span className='text-white'>{timer % 60} secs</span>
-//       <div>
-//         <button onClick={startTimer} className='bg-slate-600 text-white mx-3 p-2'>Start</button>
-//         <button onClick={stopTimer} className='bg-slate-600 text-white mx-3 p-2'>Stop</button>
-//         <button onClick={resetTimer} className='bg-slate-600 text-white mx-3 p-2'>Reset</button>
-//       </div>
-//     </div>
-//   );
-// }
-
 import { useState, useRef } from "react";
 
 export default function App() {

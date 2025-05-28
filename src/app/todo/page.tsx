@@ -1,13 +1,3 @@
-// import React from 'react'
-
-// function ToDoPage() {
-//   return (
-//     <div>ToDoPage</div>
-//   )
-// }
-
-// export default ToDoPage
-
 "use client"
 
 import React, { useState } from 'react';
@@ -18,8 +8,16 @@ function ChipsInput() {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && state.trim()) {
-      setChipsArray((prev) => [...prev, state.trim()]);
+
+const isDuplicate=chipsArray.find(x=>x ==state.trim());
+if (!isDuplicate) {
+  setChipsArray((prev) => [...prev, state.trim()]);
       setState('');
+}else{
+  alert("Don't send duplicate data")
+}
+
+      
     }
   };
 
