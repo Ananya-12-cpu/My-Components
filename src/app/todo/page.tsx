@@ -1,23 +1,20 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function ChipsInput() {
-  const [state, setState] = useState<string>('');
+  const [state, setState] = useState<string>("");
   const [chipsArray, setChipsArray] = useState<string[]>([]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && state.trim()) {
-
-const isDuplicate=chipsArray.find(x=>x ==state.trim());
-if (!isDuplicate) {
-  setChipsArray((prev) => [...prev, state.trim()]);
-      setState('');
-}else{
-  alert("Don't send duplicate data")
-}
-
-      
+    if (event.key === "Enter" && state.trim()) {
+      const isDuplicate = chipsArray.find((x) => x == state.trim());
+      if (!isDuplicate) {
+        setChipsArray((prev) => [...prev, state.trim()]);
+        setState("");
+      } else {
+        alert("Don't send duplicate data");
+      }
     }
   };
 
@@ -32,7 +29,7 @@ if (!isDuplicate) {
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Todo List
           </h2>
-          
+
           <div className="mb-6">
             <div className="relative">
               <input
