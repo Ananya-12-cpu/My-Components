@@ -1,47 +1,78 @@
-'use client'
+'use client';
 
-
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 export default function App() {
-  const [timer, setTimer] = useState(0);
-  const timerRef :any = useRef(null); // Use useRef instead of window.myTimer
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startTimer = () => {
-    if (!timerRef.current) {
-      timerRef.current = setInterval(() => {
-        setTimer((prev) => prev + 1);
+  const startTimer = useCallback(() => {
+    if (!intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        setSeconds(prev => prev + 1);
       }, 1000);
+      setIsRunning(true);
     }
-  };
+  }, []);
 
-  const stopTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = null; // Clear the reference
-  };
+  const stopTimer = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+      setIsRunning(false);
+    }
+  }, []);
 
-  const resetTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = null; // Clear the reference
-    setTimer(0);
-  };
-console.log(timer / 60);
+  const resetTimer = useCallback(() => {
+    stopTimer();
+    setSeconds(0);
+  }, [stopTimer]);
+
+  // Clean up on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formatTime = (value: number) => value.toString().padStart(2, '0');
 
   return (
-    <div className="container"> 
-    <div className="flex items-center justify-center my-3">
-    <span className="text-white border-spacing-2 border-solid border-2 border-gray-600 p-4">{Math.trunc(timer / 60)} mins </span>
-    <span className="text-white border-spacing-2 border-solid border-2 border-gray-600 p-4">{timer % 60} secs</span>
-    </div>
-     
-      <div className="flex items-center justify-center">
-        <button onClick={startTimer} className="bg-slate-600 text-white mx-3 p-2">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+      <div className="text-white text-3xl mb-6 flex gap-4">
+        <span className="px-6 py-3 border border-gray-500 rounded-lg bg-gray-800">
+          {formatTime(minutes)} mins
+        </span>
+        <span className="px-6 py-3 border border-gray-500 rounded-lg bg-gray-800">
+          {formatTime(remainingSeconds)} secs
+        </span>
+      </div>
+
+      <div className="flex gap-4">
+        <button
+          onClick={startTimer}
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded disabled:opacity-50"
+          disabled={isRunning}
+        >
           Start
         </button>
-        <button onClick={stopTimer} className="bg-slate-600 text-white mx-3 p-2">
+        <button
+          onClick={stopTimer}
+          className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded disabled:opacity-50"
+          disabled={!isRunning}
+        >
           Stop
         </button>
-        <button onClick={resetTimer} className="bg-slate-600 text-white mx-3 p-2">
+        <button
+          onClick={resetTimer}
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+        >
           Reset
         </button>
       </div>
