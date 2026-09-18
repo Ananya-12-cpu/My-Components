@@ -83,9 +83,11 @@ function FilterComponent() {
   }, [searchQuery, selectedCategory])
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-white mb-8">Explore Destinations</h1>
-      
+    <div>
+      <h1 className="text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">
+        Explore Destinations
+      </h1>
+
       {/* Search and Filter Section */}
       <div className="space-y-4 mb-8">
         {/* Search Input */}
@@ -96,7 +98,7 @@ function FilterComponent() {
             onChange={(e) => setSearchQuery(e.target.value)}
             value={searchQuery}
             placeholder="Search destinations..."
-            className="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400/40 transition-all"
           />
           {searchQuery && (
             <button
@@ -114,10 +116,10 @@ function FilterComponent() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all border
                 ${selectedCategory === category
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-purple-500/80 border-purple-400/60 text-white'
+                  : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-purple-400/40'
                 }`}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -133,14 +135,14 @@ function FilterComponent() {
           Array.from({ length: 6 }).map((_, index) => (
             <div
               key={index}
-              className="animate-pulse bg-gray-700 rounded-lg p-4 h-24"
+              className="animate-pulse bg-white/5 border border-white/10 rounded-2xl p-4 h-24"
             />
           ))
         ) : filterState.length > 0 ? (
           filterState.map((item, index) => (
             <div
               key={index}
-              className="bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition-all cursor-pointer"
+              className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-4 hover:bg-white/10 hover:border-purple-400/40 transition-all cursor-pointer"
             >
               <h3 className="text-lg font-semibold text-white">{item.name}</h3>
               <span className="text-sm text-gray-400">{item.category}</span>

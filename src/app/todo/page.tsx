@@ -1,10 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { TbX } from "react-icons/tb";
+import BackLink from "../components/BackLink";
 
 function ChipsInput() {
   const [state, setState] = useState<string>("");
   const [chipsArray, setChipsArray] = useState<string[]>([]);
+  const [duplicateWarning, setDuplicateWarning] = useState(false);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && state.trim()) {
@@ -12,8 +15,10 @@ function ChipsInput() {
       if (!isDuplicate) {
         setChipsArray((prev) => [...prev, state.trim()]);
         setState("");
+        setDuplicateWarning(false);
       } else {
-        alert("Don't send duplicate data");
+        setDuplicateWarning(true);
+        setTimeout(() => setDuplicateWarning(false), 2000);
       }
     }
   };
@@ -23,58 +28,54 @@ function ChipsInput() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Todo List
-          </h2>
+    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white px-4 py-12">
+      <div className="max-w-2xl mx-auto">
+        <BackLink />
 
-          <div className="mb-6">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Add a new task and press Enter"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
-            </div>
+        <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+          <h1 className="text-2xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">
+            To Do List
+          </h1>
+
+          <div className="mb-2">
+            <input
+              type="text"
+              placeholder="Add a new task and press Enter"
+              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400/40 transition-all"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
           </div>
+
+          <p
+            className={`text-sm text-amber-400 mb-4 transition-opacity ${
+              duplicateWarning ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            That task is already on your list.
+          </p>
 
           <div className="flex flex-wrap gap-2">
             {chipsArray.map((chip, index) => (
               <div
                 key={index}
-                className="group flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full transition-all duration-200 hover:bg-blue-200"
+                className="group flex items-center gap-2 bg-purple-500/15 border border-purple-400/30 text-purple-100 px-4 py-2 rounded-full transition-all hover:bg-purple-500/25"
               >
                 <span className="text-sm font-medium">{chip}</span>
                 <button
                   onClick={() => deleteChipHandler(chip)}
-                  className="text-blue-600 hover:text-blue-800 focus:outline-none transition-colors duration-200"
+                  className="text-purple-300 hover:text-white focus:outline-none transition-colors"
                   aria-label={`Delete ${chip}`}
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <TbX size={16} />
                 </button>
               </div>
             ))}
           </div>
 
           {chipsArray.length === 0 && (
-            <div className="text-center text-gray-500 mt-4">
+            <div className="text-center text-gray-500 mt-6 text-sm">
               No tasks added yet. Add your first task above!
             </div>
           )}

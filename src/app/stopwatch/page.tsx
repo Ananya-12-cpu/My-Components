@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
+import { TbPlayerPlay, TbPlayerStop, TbRefresh } from 'react-icons/tb';
+import BackLink from '../components/BackLink';
 
 export default function App() {
   const [seconds, setSeconds] = useState(0);
@@ -44,37 +46,53 @@ export default function App() {
   const formatTime = (value: number) => value.toString().padStart(2, '0');
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
-      <div className="text-white text-3xl mb-6 flex gap-4">
-        <span className="px-6 py-3 border border-gray-500 rounded-lg bg-gray-800">
-          {formatTime(minutes)} mins
-        </span>
-        <span className="px-6 py-3 border border-gray-500 rounded-lg bg-gray-800">
-          {formatTime(remainingSeconds)} secs
-        </span>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white flex flex-col items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md">
+        <BackLink />
 
-      <div className="flex gap-4">
-        <button
-          onClick={startTimer}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded disabled:opacity-50"
-          disabled={isRunning}
-        >
-          Start
-        </button>
-        <button
-          onClick={stopTimer}
-          className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded disabled:opacity-50"
-          disabled={!isRunning}
-        >
-          Stop
-        </button>
-        <button
-          onClick={resetTimer}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-        >
-          Reset
-        </button>
+        <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-10 shadow-xl text-center">
+          <h1 className="text-2xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">
+            Stop Watch
+          </h1>
+
+          <div className="flex items-center justify-center gap-3 mb-10">
+            <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-white/5 border border-white/10 min-w-[90px]">
+              <span className="text-4xl font-mono font-semibold">{formatTime(minutes)}</span>
+              <span className="text-xs uppercase tracking-wide text-gray-400 mt-1">mins</span>
+            </div>
+            <span className="text-3xl text-gray-500 pb-5">:</span>
+            <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-white/5 border border-white/10 min-w-[90px]">
+              <span className="text-4xl font-mono font-semibold">{formatTime(remainingSeconds)}</span>
+              <span className="text-xs uppercase tracking-wide text-gray-400 mt-1">secs</span>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={startTimer}
+              disabled={isRunning}
+              className="flex items-center gap-2 bg-emerald-500/90 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-lg font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <TbPlayerPlay size={18} />
+              Start
+            </button>
+            <button
+              onClick={stopTimer}
+              disabled={!isRunning}
+              className="flex items-center gap-2 bg-amber-500/90 hover:bg-amber-500 text-white px-5 py-2.5 rounded-lg font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <TbPlayerStop size={18} />
+              Stop
+            </button>
+            <button
+              onClick={resetTimer}
+              className="flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 text-white px-5 py-2.5 rounded-lg font-medium transition-all"
+            >
+              <TbRefresh size={18} />
+              Reset
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

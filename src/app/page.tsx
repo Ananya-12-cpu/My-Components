@@ -32,23 +32,39 @@ const modules = [
     description: "Track time with a stylish stopwatch.",
     route: "/stopwatch",
   },
+  {
+    name: "Markdown Preview",
+    description: "Write markdown and preview it live.",
+    route: "/markdown_preview",
+  },
+  {
+    name: "QR Code",
+    description: "Generate a scannable QR code.",
+    route: "/qr",
+  },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-    
+    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white">
 
       <main className="max-w-6xl mx-auto px-6 py-12">
-        <h2 className="text-3xl font-semibold text-center mb-24 mt-8">Featured Modules</h2>
+        <div className="text-center mb-16 mt-12">
+          <h1 className="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">
+            My Components
+          </h1>
+          <p className="text-gray-300 text-lg">A collection of interactive UI modules built with Next.js.</p>
+        </div>
+
+        <h2 className="text-2xl font-semibold text-center mb-10 text-gray-200">Featured Modules</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {modules.map((mod, idx) => (
+          {modules.map((mod) => (
             <Link key={mod.name} href={mod.route}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+                className="bg-white/5 border border-white/10 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-purple-500/20 hover:border-purple-400/40 transition-all cursor-pointer"
               >
-                <h3 className="text-xl font-bold mb-2">{mod.name}</h3>
+                <h3 className="text-xl font-bold mb-2 text-white">{mod.name}</h3>
                 <p className="text-gray-300">{mod.description}</p>
               </motion.div>
             </Link>
@@ -57,7 +73,7 @@ export default function Home() {
       </main>
 
       <footer className="text-center text-gray-500 text-sm py-10">
-        &copy; {new Date().getFullYear()} Smart Project. Built with ❤️ using Next.js.
+        &copy; {new Date().getFullYear()} My Components. Built with ❤️ using Next.js.
       </footer>
     </div>
   );

@@ -44,32 +44,31 @@ const TablePage: React.FC<UserProps> = ({ user }) => {
   const goToLastPage = () => setCurrentPage(totalPages);
 
   if (!user || user.length == 0) {
-    return <p className="text-white">Loading...</p>;
+    return <p className="text-gray-400 text-center">Loading...</p>;
   }
 
   return (
-    <div>
+    <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-xl overflow-x-auto">
       <table
         cellPadding="10"
         cellSpacing="0"
-        style={{ border: "1px solid white" }}
-        className="text-white text-sm text-center w-full"
+        className="text-gray-200 text-sm text-center w-full border-collapse"
       >
-        <thead className="bg-gray-700">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Website</th>
-            <th>Company</th>
+        <thead>
+          <tr className="border-b border-white/10 text-gray-400 uppercase text-xs tracking-wide">
+            <th className="py-2">ID</th>
+            <th className="py-2">Name</th>
+            <th className="py-2">Username</th>
+            <th className="py-2">Email</th>
+            <th className="py-2">Address</th>
+            <th className="py-2">Phone</th>
+            <th className="py-2">Website</th>
+            <th className="py-2">Company</th>
           </tr>
         </thead>
         <tbody>
           {currentRows.map((u) => (
-            <tr key={u.id}>
+            <tr key={u.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
               <td>{u.id}</td>
               <td>{u.name}</td>
               <td>{u.username}</td>
@@ -86,10 +85,10 @@ const TablePage: React.FC<UserProps> = ({ user }) => {
         </tbody>
       </table>
 
-      <div className="flex gap-2 mt-4 flex-wrap">
+      <div className="flex gap-2 mt-4 flex-wrap justify-center">
         <button
           onClick={goToFirstPage}
-          className="text-white px-2 py-2 bg-gray-700 rounded"
+          className="text-white px-2 py-2 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
           disabled={currentPage === 1}
         >
           <MdOutlineKeyboardDoubleArrowLeft />
@@ -99,8 +98,10 @@ const TablePage: React.FC<UserProps> = ({ user }) => {
           <button
             key={page}
             onClick={() => setCurrentPage(page)}
-            className={`px-3 py-1 rounded ${
-              currentPage === page ? "bg-blue-500 text-white" : "bg-gray-700 text-white"
+            className={`px-3 py-1.5 rounded-lg transition-all border ${
+              currentPage === page
+                ? "bg-purple-500/80 border-purple-400/60 text-white"
+                : "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-purple-400/40"
             }`}
           >
             {page}
@@ -109,7 +110,7 @@ const TablePage: React.FC<UserProps> = ({ user }) => {
 
         <button
           onClick={goToLastPage}
-          className="text-white px-2 py-2 bg-gray-700 rounded"
+          className="text-white px-2 py-2 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-400/40 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
           disabled={currentPage === totalPages}
         >
           <MdOutlineKeyboardDoubleArrowRight />
