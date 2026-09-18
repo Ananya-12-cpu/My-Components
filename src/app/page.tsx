@@ -38,6 +38,11 @@ const modules = [
     route: "/markdown_preview",
   },
   {
+    name: "Tic Tac Toe",
+    description: "Classic two-player game with winner detection.",
+    route: "/tictactoe",
+  },
+  {
     name: "QR Code",
     description: "Generate a scannable QR code.",
     route: "/qr",
